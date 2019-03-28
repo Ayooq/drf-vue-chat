@@ -39,9 +39,8 @@ export default {
       };
 
       this.$http(options)
-        .then(response => {
-          this.$emit("message-submitted", response.data.data.messages);
-          console.log(response.data.data.messages);
+        .then(() => {
+          this.$emit("message-submitted");
         })
         .catch(error => {
           if (error.response) {

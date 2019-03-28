@@ -23,7 +23,7 @@ class RoomSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MessageGetSerializer(serializers.ModelSerializer):
+class MessageSerializer(serializers.ModelSerializer):
     """Сериализатор для моделей сообщений чата."""
 
     sender = UserSerializer()
@@ -33,8 +33,8 @@ class MessageGetSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class MessagePostSerializer(serializers.ModelSerializer):
+# class MessagePostSerializer(serializers.ModelSerializer):
 
-    class Meta:
-        model = Message
-        fields = ('room', 'text')
+#     class Meta:
+#         model = Message
+#         fields = ('room', 'text')

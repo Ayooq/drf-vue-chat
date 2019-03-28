@@ -18,7 +18,6 @@ export default {
   watch: {
     token() {
       this.$http.defaults.headers.common["Authorization"] = this.token;
-      console.log(this.$http.defaults.headers.common["Authorization"]);
     }
   },
   created() {

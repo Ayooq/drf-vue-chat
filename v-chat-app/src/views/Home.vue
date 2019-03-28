@@ -23,10 +23,13 @@ export default {
   },
   methods: {
     logoutUser() {
-      localStorage.removeItem("auth_token");
-      this.$store.commit("eraseToken");
-      this.$store.dispatch("deauthorize");
+      sessionStorage.removeItem("auth_token");
+      this.setAuthState();
       this.$router.push("/auth");
+    },
+    setAuthState() {
+      this.$store.commit("eraseToken");
+      this.$store.commit("alterAuthStatus");
     },
     showDialog() {
       this.isVisible = true;

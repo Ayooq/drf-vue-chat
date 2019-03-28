@@ -1,7 +1,7 @@
 <template>
   <div class="dialog-frame">
-    <DialogFrameMessagesList :updated-dialog="dialog"/>
-    <DialogFrameReplyForm @message-submitted="updateDialog"/>
+    <DialogFrameMessagesList :update-dialog="updateDialog" @up-to-date="updateDialog = false"/>
+    <DialogFrameReplyForm @message-submitted="updateDialog = true"/>
   </div>
 </template>
 
@@ -17,13 +17,8 @@ export default {
   },
   data() {
     return {
-      dialog: undefined
+      updateDialog: false
     };
-  },
-  methods: {
-    updateDialog(content) {
-      this.dialog = content;
-    }
   }
 };
 </script>

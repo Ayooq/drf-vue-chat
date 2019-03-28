@@ -29,11 +29,9 @@ export default {
 
       this.$http(options)
         .then(response => {
-          alert("Добро пожаловать!");
           const AUTH_TOKEN = response.data.data.attributes.auth_token;
-          localStorage.setItem("auth_token", AUTH_TOKEN);
-          this.$store.commit("setToken");
-          this.$store.dispatch("authSuccess");
+          sessionStorage.setItem("auth_token", AUTH_TOKEN);
+          this.setAuthState();
           this.goBackOrRedirectToHome();
         })
         .catch(error => {
@@ -59,6 +57,11 @@ export default {
 
           console.log(error.config);
         });
+    },
+
+    setAuthState() {
+      this.$store.commit("setToken");
+      this.$store.commit("alterAuthStatus");
     },
 
     goBackOrRedirectToHome() {

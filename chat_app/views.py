@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from rest_framework.reverse import reverse
 
 from .models import Room, Message
-from .serializers import RoomSerializer, MessageGetSerializer, MessagePostSerializer
+from .serializers import RoomSerializer, MessageSerializer
 
 
 class RoomView(APIView):
@@ -22,11 +22,11 @@ class MessageView(APIView):
     def get(self, request):
         current_room = request.query_params.get('room')
         queryset = Message.objects.filter(room=current_room)
-        serializer = MessageGetSerializer(queryset, many=True)
+        serializer = MessageSerializer(queryset, many=True)
         return Response({'messages': serializer.data})
 
     def post(self, request):
-        serializer = MessagePostSerializer(data=request.data)
+        serializer = MessageSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save(sender=request.user)
@@ -34,6 +34,6 @@ class MessageView(APIView):
             location = reverse('chat:dialogs', request=request)
             location_header = {'Location': location}
 
-            return Response({'messages': serializer.data}, status=status.HTTP_201_CREATED, headers=location_header)
+            return Response('Сообщение добавлено.', status=status.HTTP_201_CREATED, headers=location_header)
 
         return Response('Отправленные данные некорректны!', status=status.HTTP_406_NOT_ACCEPTABLE)

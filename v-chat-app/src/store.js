@@ -15,7 +15,7 @@ export default new Vuex.Store({
     },
 
     setToken(state) {
-      state.token = "Token " + localStorage.getItem("auth_token");
+      state.token = "Token " + sessionStorage.getItem("auth_token");
     },
     eraseToken(state) {
       state.token = "";
@@ -23,14 +23,6 @@ export default new Vuex.Store({
 
     provideRoomId(state, payload) {
       state.roomId = payload;
-    }
-  },
-  actions: {
-    authSuccess({ commit }) {
-      commit("alterAuthStatus");
-    },
-    deauthorize({ commit }) {
-      commit("alterAuthStatus");
     }
   }
 });

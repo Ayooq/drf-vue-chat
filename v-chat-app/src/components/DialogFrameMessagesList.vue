@@ -16,7 +16,7 @@
 export default {
   name: "MessagesList",
   props: {
-    updatedDialog: Object
+    updateDialog: Boolean
   },
   data() {
     return {
@@ -29,7 +29,7 @@ export default {
     }
   },
   watch: {
-    updatedDialog: "reRenderList"
+    updateDialog: "reRenderList"
   },
   created() {
     this.showMessages();
@@ -52,6 +52,7 @@ export default {
         .then(response => {
           this.messages = response.data.data.messages;
           console.log(this.messages);
+          this.$emit("up-to-date");
         })
         .catch(error => {
           if (error.response) {
@@ -74,7 +75,9 @@ export default {
     },
 
     reRenderList() {
-      this.messages = this.updatedDialog;
+      if (this.updateDialog) {
+        this.showMessages();
+      }
     }
   }
 };
